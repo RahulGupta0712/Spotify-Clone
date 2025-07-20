@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Clone</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="utility.css">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <nav class="flex items-center jus-space-between">
+            <div class="left-nav flex items-center jus-center gap-20">
+                <img src="./assets/images/menu.svg" class="invert hamburger" alt="Menu">
+                <img class="logo invert" src="./assets/images/logo.svg" alt="Spotify logo">
+                <div title="Home" class="home"><img class="invert" src="./assets/images/home.svg" alt="Home"></div>
+                <div class="search flex items-center jus-center gap-20">
+                    <img class="invert" src="./assets/images/search.svg" alt="Search icon">
+                    <input type="search" placeholder="What do you want to play?">
+                    <div class="vertical-sep light-grey"></div>
+                    <img title="Browse" class="invert" src="./assets/images/browse-unselected.svg" alt="Browse icon">
+                </div>
+
+            </div>
+            <div class="right-nav">
+                <ul class="flex jus-start items-center gap-20">
+                    <li>Premium</li>
+                    <li>Support</li>
+                    <li>Download</li>
+                    <div class="hide-on-mobile vertical-sep"></div>
+                    <li class="flex jus-center items-center small gap-10"><img class="invert"
+                            src="./assets/images/download.svg" alt="Download">Install App</li>
+                    <li id="signup-btn" class="small">Sign up</li>
+                    <li>
+                        <div id="login-btn" class="login">Log in</div>
+                    </li>
+                </ul>
+            </div>
+            <img class="invert show-on-mobile" src="./assets/images/menu.svg" alt="Menu">
+        </nav>
+    </header>
+    <div class="container flex jus-center items-center gap-10">
+        <div class="left">
+            <div class="flex jus-space-between items-center">
+                <h1>Your Library</h1>
+                <button id="add-playlist-btn">+</button>
+            </div>
+            <div class="songs-list">
+                <ul>
+
+                </ul>
+            </div>
+            <footer>
+                <ul class="flex items-center gap-10 flex-wrap">
+                    <li>Legal</li>
+                    <li>Safety & Privacy Center</li>
+                    <li>Privacy Policy</li>
+                    <li>Cookies</li>
+                    <li>About Ads</li>
+                    <li>Accessibility</li>
+                </ul>
+                <a href="index.html">Cookies</a>
+                <div class="lang flex gap-10 jus-center items-center"><img class="invert"
+                        src="./assets/images/globe.svg" alt="globe">English</div>
+            </footer>
+        </div>
+        <div class="right">
+            <div class="trending-songs">
+                <div class="pad-15 flex jus-space-between">
+                    <h1>Trending songs</h1>
+                    <button class="show-all">Show all</button>
+                </div>
+                <div class="card-cont flex jus-start items-start gap-10">
+                    <div class="card">
+                        <div class="cover">
+                            <img src="./assets/images/sahiba-song.jpeg" alt="Sahiba Song cover">
+                            <img class="play-btn" src="./assets/images/play.svg" alt="Play song">
+                        </div>
+                        <h2>Sahiba</h2>
+                        <p>Aditya Rikhari</p>
+                    </div>
+                    <div class="card">
+                        <div class="cover">
+                            <img class="play-btn" src="./assets/images/play.svg" alt="Play song">
+                            <img src="./assets/images/saiyarra-song.jpeg" alt="Saiyarra Song cover">
+                        </div>
+                        <h2>Saiyaara (From "Saiyaara")</h2>
+                        <p>Tanishk Bagchi, Faheem Abdullah, Arslan Nizami, Irshad Kamil</p>
+                    </div>
+                    <div class="card">
+                        <div class="cover">
+                            <img src="./assets/images/sahiba-song.jpeg" alt="Sahiba Song cover">
+                            <img class="play-btn" src="./assets/images/play.svg" alt="Play song">
+                        </div>
+                        <h2>Sahiba</h2>
+                        <p>Aditya Rikhari</p>
+                    </div>
+                    <div class="card">
+                        <div class="cover">
+                            <img class="play-btn" src="./assets/images/play.svg" alt="Play song">
+                            <img src="./assets/images/saiyarra-song.jpeg" alt="Saiyarra Song cover">
+                        </div>
+                        <h2>Saiyaara (From "Saiyaara")</h2>
+                        <p>Tanishk Bagchi, Faheem Abdullah, Arslan Nizami, Irshad Kamil</p>
+                    </div>
+                    <div class="card">
+                        <div class="cover">
+                            <img src="./assets/images/sahiba-song.jpeg" alt="Sahiba Song cover">
+                            <img class="play-btn" src="./assets/images/play.svg" alt="Play song">
+                        </div>
+                        <h2>Sahiba</h2>
+                        <p>Aditya Rikhari</p>
+                    </div>
+                    <div class="card">
+                        <div class="cover">
+                            <img class="play-btn" src="./assets/images/play.svg" alt="Play song">
+                            <img src="./assets/images/saiyarra-song.jpeg" alt="Saiyarra Song cover">
+                        </div>
+                        <h2>Saiyaara (From "Saiyaara")</h2>
+                        <p>Tanishk Bagchi, Faheem Abdullah, Arslan Nizami, Irshad Kamil</p>
+                    </div>
+                    <div class="card">
+                        <div class="cover">
+                            <img class="play-btn" src="./assets/images/play.svg" alt="Play song">
+                            <img src="./assets/images/saiyarra-song.jpeg" alt="Saiyarra Song cover">
+                        </div>
+                        <h2>Saiyaara (From "Saiyaara")</h2>
+                        <p>Tanishk Bagchi, Faheem Abdullah, Arslan Nizami, Irshad Kamil</p>
+                    </div>
+                    <div class="card">
+                        <div class="cover">
+                            <img class="play-btn" src="./assets/images/play.svg" alt="Play song">
+                            <img src="./assets/images/saiyarra-song.jpeg" alt="Saiyarra Song cover">
+                        </div>
+                        <h2>Saiyaara (From "Saiyaara")</h2>
+                        <p>Tanishk Bagchi, Faheem Abdullah, Arslan Nizami, Irshad Kamil</p>
+                    </div>
+                    <div class="card">
+                        <div class="cover">
+                            <img class="play-btn" src="./assets/images/play.svg" alt="Play song">
+                            <img src="./assets/images/saiyarra-song.jpeg" alt="Saiyarra Song cover">
+                        </div>
+                        <h2>Saiyaara (From "Saiyaara")</h2>
+                        <p>Tanishk Bagchi, Faheem Abdullah, Arslan Nizami, Irshad Kamil</p>
+                    </div>
+                    <div class="card">
+                        <div class="cover">
+                            <img class="play-btn" src="./assets/images/play.svg" alt="Play song">
+                            <img src="./assets/images/saiyarra-song.jpeg" alt="Saiyarra Song cover">
+                        </div>
+                        <h2>Saiyaara (From "Saiyaara")</h2>
+                        <p>Tanishk Bagchi, Faheem Abdullah, Arslan Nizami, Irshad Kamil</p>
+                    </div>
+                    <div class="card">
+                        <div class="cover">
+                            <img class="play-btn" src="./assets/images/play.svg" alt="Play song">
+                            <img src="./assets/images/saiyarra-song.jpeg" alt="Saiyarra Song cover">
+                        </div>
+                        <h2>Saiyaara (From "Saiyaara")</h2>
+                        <p>Tanishk Bagchi, Faheem Abdullah, Arslan Nizami, Irshad Kamil</p>
+                    </div>
+                    <div class="card">
+                        <div class="cover">
+                            <img class="play-btn" src="./assets/images/play.svg" alt="Play song">
+                            <img src="./assets/images/saiyarra-song.jpeg" alt="Saiyarra Song cover">
+                        </div>
+                        <h2>Saiyaara (From "Saiyaara")</h2>
+                        <p>Tanishk Bagchi, Faheem Abdullah, Arslan Nizami, Irshad Kamil</p>
+                    </div>
+                    <div class="card">
+                        <div class="cover">
+                            <img class="play-btn" src="./assets/images/play.svg" alt="Play song">
+                            <img src="./assets/images/saiyarra-song.jpeg" alt="Saiyarra Song cover">
+                        </div>
+                        <h2>Saiyaara (From "Saiyaara")</h2>
+                        <p>Tanishk Bagchi, Faheem Abdullah, Arslan Nizami, Irshad Kamil</p>
+                    </div>
+                    <div class="card">
+                        <div class="cover">
+                            <img class="play-btn" src="./assets/images/play.svg" alt="Play song">
+                            <img src="./assets/images/saiyarra-song.jpeg" alt="Saiyarra Song cover">
+                        </div>
+                        <h2>Saiyaara (From "Saiyaara")</h2>
+                        <p>Tanishk Bagchi, Faheem Abdullah, Arslan Nizami, Irshad Kamil</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="play-bar">
+                <div class="song-details flex items-center jus-space-between">
+                    <div class="song-info">
+                        <div class="song-name"></div>
+                    </div>
+
+                    <div class="song-buttons flex jus-center items-center gap-10">
+                        <img id="prev-song-btn" src="./assets/images/prevsong.svg" alt="Previous song">
+                        <img id="play-song-btn" width="30" src="./assets/images/playsong.svg" alt="Play song">
+                        <img id="next-song-btn" src="./assets/images/nextsong.svg" alt="Next song">
+                    </div>
+
+                    <div class="song-time">
+                        <span class="current-time"></span>
+                        <span class="duration"></span>
+                    </div>
+
+                    <div class="volume flex items-center jus-center gap-10">
+                        <img class="vol-img invert" src="./assets/images/volume-up.png" alt="Volume indicator" width="24">
+                        <input type="range" value="100" id="song-volume">
+                    </div>
+                </div>
+
+                <div class="seek-bar">
+                    <div class="processed-bar"></div>
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <footer class="flex items-center jus-space-between">
+        <div class="left-foot">
+            <h1>Preview of Spotify</h1>
+            <p>Sign up to get unlimited songs and podcasts with occasional ads. No credit card needed.</p>
+        </div>
+        <div class="right-foot">
+            <button>Sign up for free</button>
+        </div>
+    </footer> -->
+
+    <script src="script.js"></script>
+</body>
+
+</html>
