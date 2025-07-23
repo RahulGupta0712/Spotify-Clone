@@ -1,7 +1,7 @@
 console.log("console started!!!")
 
 let currentFolder = "";
-let firstAlbum=true;
+let firstAlbum = true;
 
 async function getSongs(folder) {
     currentFolder = folder;
@@ -154,7 +154,7 @@ async function displayAllAlbums() {
         let card = document.createElement('div');
         card.setAttribute("data-folder", foldername);
         card.setAttribute("class", "card");
-        card.innerHTML =  `<div class="cover">
+        card.innerHTML = `<div class="cover">
                             <img src="./assets/songs/${foldername}/cover.jpg" alt="cover">
                             <img class="play-btn" src="./assets/images/play.svg" alt="Play song">
                         </div>
@@ -162,9 +162,9 @@ async function displayAllAlbums() {
                         <p>${folderinfo_json.description}</p>`
 
         document.querySelector('.card-cont').append(card);
-        
+
         card.addEventListener('click', async event => {
-            firstAlbum=false;
+            firstAlbum = false;
             let t = event.currentTarget.dataset.folder
             songs = await getSongs(t);
         })
@@ -174,7 +174,7 @@ async function displayAllAlbums() {
 
 async function main() {
     // all songs
-    songs = await getSongs("public");
+    songs = await getSongs("public songs");
 
 
     // display all albums
@@ -241,12 +241,12 @@ async function main() {
 
     document.querySelector('.vol-img').addEventListener('click', (event) => {
         // console.log(event, event.target, event.target.src)
-        if(event.target.src.endsWith("volume-mute.png")){
+        if (event.target.src.endsWith("volume-mute.png")) {
             audio.volume = 0.1;
             event.target.src = "./assets/images/volume-down.png";
             document.getElementById('song-volume').value = 10;
         }
-        else{
+        else {
             audio.volume = 0;
             event.target.src = "./assets/images/volume-mute.png";
             document.getElementById('song-volume').value = 0;
