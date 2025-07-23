@@ -6,7 +6,7 @@ let firstAlbum=true;
 async function getSongs(folder) {
     currentFolder = folder;
     // console.log(`http://127.0.0.1:3000/SpotifyCloneProject/assets/songs/${folder}`);
-    let x = await fetch(`http://127.0.0.1:3000/SpotifyCloneProject/assets/songs/${folder}`)
+    let x = await fetch(`./assets/songs/${folder}`)
     let songsDetails = await x.text();
     // console.log(songsDetails)
 
@@ -134,7 +134,7 @@ document.getElementById('play-song-btn').addEventListener('click', () => {
 })
 
 async function displayAllAlbums() {
-    let x = await fetch(`http://127.0.0.1:3000/SpotifyCloneProject/assets/songs/`)
+    let x = await fetch(`./assets/songs/`)
     let albumsDetails = await x.text();
 
     let div = document.createElement('div');
@@ -148,7 +148,7 @@ async function displayAllAlbums() {
     arr.slice(1, arr.length - 1).forEach(async e => {
         // console.log(e, e.textContent.slice(0, e.textContent.length - 1));
         let foldername = e.textContent.slice(0, e.textContent.length - 1);
-        let folderinfo = await fetch(`http://127.0.0.1:3000/SpotifyCloneProject/assets/songs/${foldername}/info.json`)
+        let folderinfo = await fetch(`./assets/songs/${foldername}/info.json`)
         let folderinfo_json = await folderinfo.json();
 
         let card = document.createElement('div');
