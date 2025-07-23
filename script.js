@@ -1,7 +1,12 @@
 console.log("console started!!!")
 
-async function getSongs() {
-    let x = await fetch('http://127.0.0.1:3000/SpotifyCloneProject/assets/songs/')
+let currentFolder = "";
+let firstAlbum=true;
+
+async function getSongs(folder) {
+    currentFolder = folder;
+    // console.log(`http://127.0.0.1:3000/SpotifyCloneProject/assets/songs/${folder}`);
+    let x = await fetch(`http://127.0.0.1:3000/SpotifyCloneProject/assets/songs/${folder}`)
     let songsDetails = await x.text();
     // console.log(songsDetails)
 
@@ -18,6 +23,39 @@ async function getSongs() {
             songs.push([element.href, element.textContent.split('.mp3')[0]]);
         }
     });
+
+    // show all songs in library
+    let songListElt = document.querySelector('.songs-list ul')
+    songListElt.innerHTML = "";
+    for (const song of songs) {
+        songListElt.innerHTML += `<li class="flex jus-space-between items-center gap-20">
+        <div class="flex jus-start items-center gap-20">
+                        <img class="invert" src="./assets/images/music.svg" alt="Music">
+                        <div>
+                            <div class="songname">${song[1]}</div>
+                            <div class="singername small">Greater Circle</div>
+                        </div>
+                        </div>
+                        <div class="playnow flex jus-end items-center gap-10">
+                            <span>Play Now</span>
+                            <img class="invert" src="./assets/images/playsong.svg" alt="">
+                        </div>
+                    </li>`
+    }
+
+    // play song
+    let index = Math.floor(Math.random() * songs.length)
+    playMusic(songs[index][1], !firstAlbum);
+
+    // attach event listener to every song in library in left hand side
+    let allSongs = document.querySelector('.songs-list').getElementsByTagName('li')
+    // console.log(allSongs)
+    Array.from(allSongs).forEach(e => {
+        e.addEventListener('click', () => {
+            let songName = e.querySelector('.songname').textContent
+            playMusic(songName);
+        })
+    })
 
     return songs;
 }
@@ -70,17 +108,17 @@ audio.addEventListener("loadeddata", () => {
 
 const playMusic = (song, playNow = 1) => {
     currentSong = song;
-    audio.src = "./assets/songs/" + song + ".mp3";
+    audio.src = `./assets/songs/${currentFolder}/${song}.mp3`;
+    document.querySelector('.seek-bar .processed-bar').style.width = `0%`;
+    document.querySelector('.seek-bar .circle').style.left = `0%`;
+
+    // console.log(`./assets/songs/${currentFolder}/${song}.mp3`);
     document.querySelector('.song-name').textContent = song;
+    document.getElementById('play-song-btn').src = "./assets/images/playsong.svg"
     if (playNow) {
         audio.play();
         document.getElementById('play-song-btn').src = "./assets/images/pause-button.png"
     }
-
-
-    // console.log("song playing")
-
-
 }
 
 document.getElementById('play-song-btn').addEventListener('click', () => {
@@ -95,41 +133,53 @@ document.getElementById('play-song-btn').addEventListener('click', () => {
     }
 })
 
-async function main() {
-    // all songs
-    songs = await getSongs();
+async function displayAllAlbums() {
+    let x = await fetch(`http://127.0.0.1:3000/SpotifyCloneProject/assets/songs/`)
+    let albumsDetails = await x.text();
 
-    // show all songs in library
-    let songListElt = document.querySelector('.songs-list ul')
-    for (const song of songs) {
-        songListElt.innerHTML += `<li class="flex jus-space-between items-center gap-20">
-        <div class="flex jus-start items-center gap-20">
-                        <img class="invert" src="./assets/images/music.svg" alt="Music">
-                        <div>
-                            <div class="songname">${song[1]}</div>
-                            <div class="singername small">Greater Circle</div>
-                        </div>
-                        </div>
-                        <div class="playnow flex jus-end items-center gap-10">
-                            <span>Play Now</span>
-                            <img class="invert" src="./assets/images/playsong.svg" alt="">
-                        </div>
-                    </li>`
-    }
+    let div = document.createElement('div');
+    div.innerHTML = albumsDetails;
 
-    // play song
-    let index = Math.floor(Math.random() * songs.length)
-    playMusic(songs[index][1], 0)
+    // console.log(div);
 
-    // attach event listener to every song in library in left hand side
-    let allSongs = document.querySelector('.songs-list').getElementsByTagName('li')
-    // console.log(allSongs)
-    Array.from(allSongs).forEach(e => {
-        e.addEventListener('click', () => {
-            let songName = e.querySelector('.songname').textContent
-            playMusic(songName);
+    let allAs = div.getElementsByTagName('a');
+    let arr = Array.from(allAs);
+    // document.querySelector('.card-cont').innerHTML = "";
+    arr.slice(1, arr.length - 1).forEach(async e => {
+        // console.log(e, e.textContent.slice(0, e.textContent.length - 1));
+        let foldername = e.textContent.slice(0, e.textContent.length - 1);
+        let folderinfo = await fetch(`http://127.0.0.1:3000/SpotifyCloneProject/assets/songs/${foldername}/info.json`)
+        let folderinfo_json = await folderinfo.json();
+
+        let card = document.createElement('div');
+        card.setAttribute("data-folder", foldername);
+        card.setAttribute("class", "card");
+        card.innerHTML =  `<div class="cover">
+                            <img src="./assets/songs/${foldername}/cover.jpg" alt="cover">
+                            <img class="play-btn" src="./assets/images/play.svg" alt="Play song">
+                        </div>
+                        <h2>${folderinfo_json.title}</h2>
+                        <p>${folderinfo_json.description}</p>`
+
+        document.querySelector('.card-cont').append(card);
+        
+        card.addEventListener('click', async event => {
+            firstAlbum=false;
+            let t = event.currentTarget.dataset.folder
+            songs = await getSongs(t);
         })
     })
+}
+
+
+async function main() {
+    // all songs
+    songs = await getSongs("public");
+
+
+    // display all albums
+    displayAllAlbums();
+
 
     document.getElementById('prev-song-btn').addEventListener('click', () => {
         // find index of currentSong in songs
@@ -153,7 +203,7 @@ async function main() {
         // let progress = (event.offsetX / event.target.getBoundingClientRect().width) * 100;
         let progress = (event.offsetX / seekBar.offsetWidth) * 100;
         document.querySelector('.seek-bar .circle').style.left = progress + "%";
-        document.querySelector('.seek-bar .processed-bar').style.width = progress+"%";
+        document.querySelector('.seek-bar .processed-bar').style.width = progress + "%";
         audio.currentTime = (progress / 100) * audio.duration;
     })
 
@@ -189,11 +239,27 @@ async function main() {
         }
     })
 
-    document.querySelector('.vol-img').addEventListener('click', () => {
-        audio.volume = 0;
-        document.querySelector('.vol-img').src = "./assets/images/volume-mute.png";
-        document.getElementById('song-volume').value = 0;
+    document.querySelector('.vol-img').addEventListener('click', (event) => {
+        // console.log(event, event.target, event.target.src)
+        if(event.target.src.endsWith("volume-mute.png")){
+            audio.volume = 0.1;
+            event.target.src = "./assets/images/volume-down.png";
+            document.getElementById('song-volume').value = 10;
+        }
+        else{
+            audio.volume = 0;
+            event.target.src = "./assets/images/volume-mute.png";
+            document.getElementById('song-volume').value = 0;
+        }
     })
+
+    Array.from(document.getElementsByClassName('card')).forEach(card => {
+        card.addEventListener('click', async event => {
+            let t = event.currentTarget.dataset.folder
+            songs = await getSongs(t);
+        })
+    })
+
 }
 
 main();
